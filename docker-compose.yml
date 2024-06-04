@@ -1,0 +1,21 @@
+services:
+  spring-app:
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - redis
+    networks:
+      - spring-boot-redis
+
+  redis:
+    hostname: redis
+    image: "redis:latest"
+    ports:
+      - "6379:6379"
+    networks:
+      - spring-boot-redis
+
+networks:
+  spring-boot-redis:
+    driver: bridge
